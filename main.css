@@ -11,13 +11,13 @@ body {
   }
 }
 
-/*.container {
-    width: 80%;
+.container {
+    width: 90%;
     margin: 0 auto;
 }
 
 
-*/label {
+label {
     display:block;
     margin-bottom:10px;
 }
@@ -82,4 +82,12 @@ h3{padding-left: 10px;}
 
 .trans_search_table_box {
     display: none;
+}
+
+/*#showMoreModal {
+  width:100%;
+}*/
+
+.modal {
+  overflow: hidden;
 }
