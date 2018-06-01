@@ -358,43 +358,7 @@
 
 
         var SeaPharmaContract = web3.eth.contract(
-
 [
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_userType",
-        "type": "uint256"
-      },
-      {
-        "name": "_drugId",
-        "type": "uint256"
-      },
-      {
-        "name": "_quantity",
-        "type": "uint256"
-      },
-      {
-        "name": "buyerId",
-        "type": "uint256"
-      },
-      {
-        "name": "sellerId",
-        "type": "uint256"
-      }
-    ],
-    "name": "checkTransactionIntegrity",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
   {
     "constant": false,
     "inputs": [],
@@ -695,10 +659,9 @@
     "type": "function"
   }
 ]
-
 );
 
-    var SeaPharma = SeaPharmaContract.at('0xf7b0caf7c0e14384ec5195aa33f88e936bf956c9');
+    var SeaPharma = SeaPharmaContract.at('0x035087b45c1e407beca0329e96c7c4aa49c90e89');
 
 
 // ------------------------------add transaction method -----------
@@ -749,7 +712,7 @@
                         blockNumber = bs_res[4].c;
                         blockHashNow = bs_res[5];
                         blockHashPrev = bs_res[6];
-                        console.log(blockNumber, blockHashNow, blockHashPrev);
+                        // console.log(blockNumber, blockHashNow, blockHashPrev);
 
 
                         });
@@ -760,7 +723,7 @@
 
                                 tmpList = [search_res[0].c, search_res[1], search_res[2].c, search_res[3].c, search_res[4], bId, bName, sId, sName, blockNumber, blockHashNow, blockHashPrev];
                                 // console.log(blockNumber, blockHashNow, blockHashPrev);
-                                console.log(tmpList);
+                                // console.log(tmpList);
                                 allTransactionsList.push(tmpList);
 
 
@@ -837,38 +800,54 @@
             
         });
 
-// ------------------------------------------transaction id search --------------
+// ------------------------------------------seller id search --------------
 
         var s = $("#search").click(function(){//button name search
                         $(".trans_search_table_box").show();
 
-            var transaction_search_str = '';          
+            var seller_search_list = [];
+
 
             var i;
             for(i=0; i<allTransactionsList.length; i++)
+            { 
+
+                var _sID = $("#search_id").val();
+
+                if(_sID == allTransactionsList[i][7]){
+                  console.log(_sID, allTransactionsList[i][7]);
+                    seller_search_list.push(allTransactionsList[i]);
+                }
+
+
+            }      
+
+            var i;
+            var transaction_search_str = '';    
+
+            for(i=0; i<seller_search_list.length; i++)
             {
 
-                var _tID = $("#search_id").val();
+              console.log('length', seller_search_list.length);
 
-                if(_tID == allTransactionsList[i][7]){
 
-                    transaction_search_str = "<tr><td>" + allTransactionsList[i][0]+ "</td><td>"+ allTransactionsList[i][1] +"</td><td>"+ allTransactionsList[i][2] +"</td><td>"+ allTransactionsList[i][3] +"</td><td>"+ allTransactionsList[i][5] +"</td><td>"+ + allTransactionsList[i][6] +"</td><td>"+ + allTransactionsList[i][7] +"</td><td>"+ allTransactionsList[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Details</button>" + "</td></tr>";
+                    transaction_search_str = transaction_search_str + "<tr><td>" + seller_search_list[i][0]+ "</td><td>"+ seller_search_list[i][1] +"</td><td>"+ seller_search_list[i][2] +"</td><td>"+ seller_search_list[i][3] +"</td><td>"+ seller_search_list[i][5] +"</td><td>"+ + seller_search_list[i][6] +"</td><td>"+ + seller_search_list[i][7] +"</td><td>"+ seller_search_list[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Details</button>" + "</td></tr>";
 
-                }
+                
                 $("#search_results_box").html(transaction_search_str);
 
-                $("#modal-drug-id").html(allTransactionsList[i][0]);
-                  $("#modal-drug-name").html(allTransactionsList[i][1]);
-                  $("#modal-quantity").html(allTransactionsList[i][2]);
-                  $("#modal-location").html(allTransactionsList[i][3]);
-                  $("#modal-transaction-added-by").html(allTransactionsList[i][4]);
-                  $("#modal-buyer-id").html(allTransactionsList[i][5]);
-                  $("#modal-buyer-name").html(allTransactionsList[i][6]);
-                  $("#modal-seller-id").html(allTransactionsList[i][7]);
-                  $("#modal-seller-name").html(allTransactionsList[i][8]);
-                  $("#modal-block-hash").html(allTransactionsList[i][9]);
-                  $("#modal-block-number").html(allTransactionsList[i][10]);
-                  $("#modal-transaction-hash").html(allTransactionsList[i][11]);
+                $("#modal-drug-id").html(seller_search_list[i][0]);
+                  $("#modal-drug-name").html(seller_search_list[i][1]);
+                  $("#modal-quantity").html(seller_search_list[i][2]);
+                  $("#modal-location").html(seller_search_list[i][3]);
+                  $("#modal-transaction-added-by").html(seller_search_list[i][4]);
+                  $("#modal-buyer-id").html(seller_search_list[i][5]);
+                  $("#modal-buyer-name").html(seller_search_list[i][6]);
+                  $("#modal-seller-id").html(seller_search_list[i][7]);
+                  $("#modal-seller-name").html(seller_search_list[i][8]);
+                  $("#modal-block-hash").html(seller_search_list[i][9]);
+                  $("#modal-block-number").html(seller_search_list[i][10]);
+                  $("#modal-transaction-hash").html(seller_search_list[i][11]);
             }
 
         });
