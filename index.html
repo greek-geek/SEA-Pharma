@@ -5,12 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+
+  <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+    <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
+
+
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
+
     <link rel="stylesheet" type="text/css" href="main.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+    <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> -->
+
     <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+
+
+
+
+    
+
 
     <title>Document</title>
 
@@ -27,20 +65,23 @@
             <h1><img src='logo.png' alt="logo"/>SEA Pharma Blockchain</h1>
           
         </div>
-          <div class="container card">
+          <div class="container-fluid card">
             <h3>All Transactions</h3><br>
             <h4 id="transactionCount"></h4>
-            <table class="table table-hover" data-toggle="table" id="table">
+
+            <table class="table table-hover data-sortable bootstrap-sortable sortable" data-toggle="table" data-sort-order="desc" id="table">
               <thead>
                 <tr>
-                  <th>Drug ID</th>
-                  <th>Drug Name</th>
-                  <th >Quantity</th>
-                  <th>User Type</th>
-                  <th>Buyer ID</th>
-                  <th>Buyer Name</th>
-                  <th>Seller ID</th>
-                  <th>Seller Name</th>
+                  <th data-sortable="true">Drug ID</th>
+                  <th data-sortable="true">Drug Name</th>
+                  <th data-sortable="true">Quantity</th>
+                  <th data-sortable="true">User Type</th>
+                  <th data-sortable="true">Buyer ID</th>
+                  <th data-sortable="true">Buyer Name</th>
+                  <th data-sortable="true">Seller ID</th>
+                  <th data-sortable="true">Seller Name</th>
+                  <th data-sortable="true">Block Number</th>
+                  <th data-sortable="true">Block Hash</th>
                   <th></th>
 
                 </tr>
@@ -52,29 +93,35 @@
           </div>
 
           <!-- Modal -->
-        <div class="modal fade" id="showMoreModal" role="dialog">
+<!--         <div class="modal fade" id="showMoreModal" role="dialog">
           <div class="modal-dialog modal-lg">
-          
+           -->
             <!-- Modal content-->
-            <div class="modal-content">
+            <!-- <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title" id="modal-title">Drug Details</h4>
+                
+
               </div>
               <div class="modal-body" id="modal-body">
-                <table class="table table-hover" data-toggle="table" id="modal-table">
+                <div id="qr">
+                  <img id='barcode' src="" alt="" title="HELLO" width="25%" height="25%" />
+                </div>
+                <table class="table table-hover" data-toggle="table" id="modal-table"> -->
                 <!-- <thead>
                   <tr>
                     <th></th>
                     <th></th>
                   </tr>
                 </thead > -->
-                 <tbody>
+                 <!-- <tbody> -->
                  <!--  <tr>
                     <td>Transaction Index: </td>
                     <td id="modal-transaction-index"></td>
                   </tr> -->
-                  <tr>
+
+                  <!-- <tr>
                     <td>Drug ID: </td>
                     <td id="modal-drug-id"></td>
                   </tr>
@@ -87,7 +134,7 @@
                     <td id="modal-quantity"></td>
                   </tr>
                   <tr>
-                    <td>Location: </td>
+                    <td>User Type: </td>
                     <td id="modal-location"></td>
                   </tr>
                   <tr>
@@ -113,17 +160,17 @@
                   <tr>
                     <td>Block Number: </td>
                     <td id="modal-block-hash"></td>
-                  </tr>
-                  <tr>
+                  </tr> -->
+                  <!-- <tr>
                     <td>Block Hash Now: </td>
                     <td id="modal-block-number"></td>
-                  </tr>
-                  <tr>
-                    <td>Block Hash Prev: </td>
+                  </tr> -->
+                  <!-- <tr>
+                    <td>Block Hash: </td>
                     <td id="modal-transaction-hash"></td>
                   </tr>
-
-                </tbody>
+ -->
+<!--                 </tbody>
               </table>
 
               </div>
@@ -134,8 +181,8 @@
             
           </div>
         </div>
-
-        <div class="container card">
+ -->
+        <div class="container-fluid card">
           <h3 >Add Transaction</h3><br><br>
           <form class="form-horizontal" action="javascript:void(0);">
             <div class="form-group">
@@ -220,7 +267,7 @@
 <!--         <h2 id="transaction"></h2>
         <h2 id="transaction_results"></h2>
  -->
-        <div class="container card">
+        <div class="container-fluid card">
           <h3 >Search by Drug ID</h3><br><br>
           <form class="form-horizontal" action="javascript:void(0);">
            
@@ -247,11 +294,13 @@
                   <th>Drug ID</th>
                   <th>Drug Name</th>
                   <th>Quantity</th>
-                  <th>Location</th>
+                  <th>User Type</th>
                   <th>Buyer ID</th>
                   <th>Buyer Name</th>
                   <th>Seller ID</th>
                   <th>Seller Name</th>
+                  <th>Block Number</th>
+                  <th>Block Hash</th>
                   <th></th>
 
                 </tr>
@@ -325,11 +374,13 @@
                   <th>Drug ID</th>
                   <th>Drug Name</th>
                   <th>Quantity</th>
-                  <th>Location</th>
+                  <th>User Type</th>
                   <th>Buyer ID</th>
                   <th>Buyer Name</th>
                   <th>Seller ID</th>
                   <th>Seller Name</th>
+                  <th>Block Number</th>
+                  <th>Block Hash</th>
                   <th></th>
                 </tr>
               </thead >
@@ -719,31 +770,49 @@
 
                         SeaPharma.getTransactionDetails(t, (err, search_res) => {
                             if(search_res){
+                              
 
 
-                                tmpList = [search_res[0].c, search_res[1], search_res[2].c, search_res[3].c, search_res[4], bId, bName, sId, sName, blockNumber, blockHashNow, blockHashPrev];
+                                tmpList = [search_res[0].c, search_res[1], search_res[2].c, search_res[3].c, search_res[4], bId, bName, sId, sName, blockNumber, blockHashNow, blockHashPrev, i];
                                 // console.log(blockNumber, blockHashNow, blockHashPrev);
                                 // console.log(tmpList);
                                 allTransactionsList.push(tmpList);
 
 
-                                table_display_str = table_display_str + "<tr><td>" + tmpList[0]+ "</td><td>"+ tmpList[1] +"</td><td>"+ tmpList[2] +"</td><td>"+ tmpList[3] +"</td><td>"+ tmpList[5] +"</td><td>"+ tmpList[6] +"</td><td>"+ tmpList[7] +"</td><td>"+ tmpList[8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Details</button>" + "</td></tr>";
-                               
+                                user_type_value = '';
+
+                                if(tmpList[3]==1){
+                                  user_type_value = "Manufacturer";
+                                }
+                                if(tmpList[3]==2){
+                                  user_type_value = "Wholesaler";
+                                }
+                                if(tmpList[3]==3){
+                                  user_type_value = "Chemist";
+                                }
+                                if(tmpList[3]==4){
+                                  user_type_value = "Retail";
+                                }
+                                qr_str = tmpList[0] + ' ' + tmpList[1];
+
+                                table_display_str = table_display_str + "<tr><td>" + tmpList[0]+ "</td><td>"+ tmpList[1] +"</td><td>"+ tmpList[2] +"</td><td>"+ user_type_value +"</td><td>"+ tmpList[5] +"</td><td>"+ tmpList[6] +"</td><td>"+ tmpList[7] +"</td><td>"+ tmpList[8] +"</td><td>" + tmpList[9] +"</td><td>" + tmpList[11] +"</td><td>" + "<img src = 'https://api.qrserver.com/v1/create-qr-code/?data="+qr_str+"&amp;size=50x50'>" + "</td></tr>";
                                 $("#display_table").html(table_display_str);
 
+                                
+
                                 // $("#modal-transaction-index").html(transactionIndex);
-                                $("#modal-drug-id").html(tmpList[0]);
-                                $("#modal-drug-name").html(tmpList[1]);
-                                $("#modal-quantity").html(tmpList[2]);
-                                $("#modal-location").html(tmpList[3]);
-                                $("#modal-transaction-added-by").html(tmpList[4]);
-                                $("#modal-buyer-id").html(tmpList[5]);
-                                $("#modal-buyer-name").html(tmpList[6]);
-                                $("#modal-seller-id").html(tmpList[7]);
-                                $("#modal-seller-name").html(tmpList[8]);
-                                $("#modal-block-hash").html(blockNumber);
-                                $("#modal-block-number").html(blockHashNow);
-                                $("#modal-transaction-hash").html(blockHashPrev);
+                                // $("#modal-drug-id").html(tmpList[0]);
+                                // $("#modal-drug-name").html(tmpList[1]);
+                                // $("#modal-quantity").html(tmpList[2]);
+                                // $("#modal-location").html(tmpList[3]);
+                                // $("#modal-transaction-added-by").html(tmpList[4]);
+                                // $("#modal-buyer-id").html(tmpList[5]);
+                                // $("#modal-buyer-name").html(tmpList[6]);
+                                // $("#modal-seller-id").html(tmpList[7]);
+                                // $("#modal-seller-name").html(tmpList[8]);
+                                // $("#modal-block-hash").html(blockNumber);
+                                // // $("#modal-block-number").html(blockHashNow);
+                                // $("#modal-transaction-hash").html(blockHashPrev);
 
                             }
 
@@ -778,23 +847,41 @@
             for(i=0; i< drugDisplayList.length; i++)
             {            
 
+                          user_type_value = '';
 
-                drug_table_disp_str = drug_table_disp_str + "<tr><td>" + drugDisplayList[i][0]+ "</td><td>"+ drugDisplayList[i][1] +"</td><td>"+ drugDisplayList[i][2] +"</td><td>"+ drugDisplayList[i][3] +"</td><td>"+ drugDisplayList[i][5] +"</td><td>"+ + drugDisplayList[i][6] +"</td><td>"+ + drugDisplayList[i][7] +"</td><td>"+ drugDisplayList[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Details</button>" + "</td></tr>";
+                              if(drugDisplayList[i][3]==1){
+                                user_type_value = "Manufacturer";
+                              }
+                              if(drugDisplayList[i][3]==2){
+                                user_type_value = "Wholesaler";
+                              }
+                              if(drugDisplayList[i][3]==3){
+                                user_type_value = "Chemist";
+                              }
+                              if(drugDisplayList[i][3]==4){
+                                user_type_value = "Retail";
+                              }
+                qr_str = drugDisplayList[i][0] + ' ' + drugDisplayList[i][1];
+
+                drug_table_disp_str = drug_table_disp_str + "<tr><td>" + drugDisplayList[i][0]+ "</td><td>"+ drugDisplayList[i][1] +"</td><td>"+ drugDisplayList[i][2] +"</td><td>"+ user_type_value +"</td><td>"+ drugDisplayList[i][5] +"</td><td>"+ drugDisplayList[i][6] +"</td><td>"+ drugDisplayList[i][7] +"</td><td>"+ drugDisplayList[i][8] +"</td><td>" + drugDisplayList[i][9] +"</td><td>" + drugDisplayList[i][11] +"</td><td>" +  "<img src = 'https://api.qrserver.com/v1/create-qr-code/?data="+qr_str+"&amp;size=50x50'>" +  "</td></tr>";
 
                   $("#drug_search_results_box").html(drug_table_disp_str);
 
-                  $("#modal-drug-id").html(drugDisplayList[i][0]);
-                  $("#modal-drug-name").html(drugDisplayList[i][1]);
-                  $("#modal-quantity").html(drugDisplayList[i][2]);
-                  $("#modal-location").html(drugDisplayList[i][3]);
-                  $("#modal-transaction-added-by").html(drugDisplayList[i][4]);
-                  $("#modal-buyer-id").html(drugDisplayList[i][5]);
-                  $("#modal-buyer-name").html(drugDisplayList[i][6]);
-                  $("#modal-seller-id").html(drugDisplayList[i][7]);
-                  $("#modal-seller-name").html(drugDisplayList[i][8]);
-                  $("#modal-block-hash").html(drugDisplayList[i][9]);
-                  $("#modal-block-number").html(drugDisplayList[i][10]);
-                  $("#modal-transaction-hash").html(drugDisplayList[i][11]);
+
+                  // generateBarCode(drugDisplayList[i][0] + " " + drugDisplayList[i][1]);
+
+                  // $("#modal-drug-id").html(drugDisplayList[i][0]);
+                  // $("#modal-drug-name").html(drugDisplayList[i][1]);
+                  // $("#modal-quantity").html(drugDisplayList[i][2]);
+                  // $("#modal-location").html(user_type_value);
+                  // $("#modal-transaction-added-by").html(drugDisplayList[i][4]);
+                  // $("#modal-buyer-id").html(drugDisplayList[i][5]);
+                  // $("#modal-buyer-name").html(drugDisplayList[i][6]);
+                  // $("#modal-seller-id").html(drugDisplayList[i][7]);
+                  // $("#modal-seller-name").html(drugDisplayList[i][8]);
+                  // $("#modal-block-hash").html(drugDisplayList[i][9]);
+                  // // $("#modal-block-number").html(drugDisplayList[i][10]);
+                  // $("#modal-transaction-hash").html(drugDisplayList[i][11]);
 
             }
             
@@ -828,30 +915,76 @@
             for(i=0; i<seller_search_list.length; i++)
             {
 
-              console.log('length', seller_search_list.length);
+                        user_type_value = '';
 
+                              if(seller_search_list[i][3]==1){
+                                user_type_value = "Manufacturer";
+                              }
+                              if(seller_search_list[i][3]==2){
+                                user_type_value = "Wholesaler";
+                              }
+                              if(seller_search_list[i][3]==3){
+                                user_type_value = "Chemist";
+                              }
+                              if(seller_search_list[i][3]==4){
+                                user_type_value = "Retail";
+                              }
 
-                    transaction_search_str = transaction_search_str + "<tr><td>" + seller_search_list[i][0]+ "</td><td>"+ seller_search_list[i][1] +"</td><td>"+ seller_search_list[i][2] +"</td><td>"+ seller_search_list[i][3] +"</td><td>"+ seller_search_list[i][5] +"</td><td>"+ + seller_search_list[i][6] +"</td><td>"+ + seller_search_list[i][7] +"</td><td>"+ seller_search_list[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Details</button>" + "</td></tr>";
+              // console.log('length', seller_search_list.length);
+                    qr_str = seller_search_list[i][0] + ' ' + seller_search_list[i][1];
+
+                    transaction_search_str = transaction_search_str + "<tr><td>" + seller_search_list[i][0]+ "</td><td>"+ seller_search_list[i][1] +"</td><td>"+ seller_search_list[i][2] +"</td><td>"+ user_type_value + "</td><td>"+ seller_search_list[i][5] +"</td><td>"+ seller_search_list[i][6] + "</td><td>" + seller_search_list[i][7] +"</td><td>"+ seller_search_list[i][8] +"</td><td>" + + seller_search_list[i][9] +"</td><td>"+ seller_search_list[i][11] +"</td><td>" + "<img src = 'https://api.qrserver.com/v1/create-qr-code/?data="+qr_str+"&amp;size=50x50'>" +  "</td></tr>";
 
                 
                 $("#search_results_box").html(transaction_search_str);
 
-                $("#modal-drug-id").html(seller_search_list[i][0]);
-                  $("#modal-drug-name").html(seller_search_list[i][1]);
-                  $("#modal-quantity").html(seller_search_list[i][2]);
-                  $("#modal-location").html(seller_search_list[i][3]);
-                  $("#modal-transaction-added-by").html(seller_search_list[i][4]);
-                  $("#modal-buyer-id").html(seller_search_list[i][5]);
-                  $("#modal-buyer-name").html(seller_search_list[i][6]);
-                  $("#modal-seller-id").html(seller_search_list[i][7]);
-                  $("#modal-seller-name").html(seller_search_list[i][8]);
-                  $("#modal-block-hash").html(seller_search_list[i][9]);
-                  $("#modal-block-number").html(seller_search_list[i][10]);
-                  $("#modal-transaction-hash").html(seller_search_list[i][11]);
+                // generateBarCode(seller_search_list[i][0] + " " + seller_search_list[i][1]);
+                // $("#modal-drug-id").html(seller_search_list[i][0]);
+                //   $("#modal-drug-name").html(seller_search_list[i][1]);
+                //   $("#modal-quantity").html(seller_search_list[i][2]);
+                //   $("#modal-location").html(user_type_value);
+                //   $("#modal-transaction-added-by").html(seller_search_list[i][4]);
+                //   $("#modal-buyer-id").html(seller_search_list[i][5]);
+                //   $("#modal-buyer-name").html(seller_search_list[i][6]);
+                //   $("#modal-seller-id").html(seller_search_list[i][7]);
+                //   $("#modal-seller-name").html(seller_search_list[i][8]);
+                //   $("#modal-block-hash").html(seller_search_list[i][9]);
+                //   // $("#modal-block-number").html(seller_search_list[i][10]);
+                //   $("#modal-transaction-hash").html(seller_search_list[i][11]);
             }
 
         });
 
+
+// ------------------------------- function to generate barcode -----------------------------------
+
+// $(document).ready(function() {
+//     // $('#table').DataTable();
+//     $('#table tfoot th').each( function (i) {
+//         var title = $('#table thead th').eq( $(this).index() ).text();
+//         $(this).html( '<input type="text" placeholder="Search '+title+'" data-index="'+i+'" />' );
+//     } );
+  
+//     // DataTable
+//     var table = $('#table').DataTable( {
+//         scrollY:        "300px",
+//         scrollX:        true,
+//         scrollCollapse: true,
+//         paging:         false,
+//         fixedColumns:   true
+//     } );
+ 
+//     // Filter event handler
+//     $( table.table().container() ).on( 'keyup', 'tfoot input', function () {
+//         table
+//             .column( $(this).data('index') )
+//             .search( this.value )
+//             .draw();
+//     } );
+
+
+
+// } );
 
     </script>
 

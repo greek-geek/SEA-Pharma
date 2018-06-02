@@ -1,868 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Bootstrap sortable table columns example</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 
-    <title>Document</title>
+  <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
 
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <!-- <link href="bootstrap.css" rel="stylesheet"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="./node_modules/web3/dist/web3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+
+  <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 </head>
+
 <body>
-    <div class="container">
-
-        
-
-    <div class="container">
-        <div class="header">
-            
-            <h1><img src='logo.png' alt="logo"/>SEA Pharma Blockchain</h1>
-          
-        </div>
-          <div class="container card">
-            <h3>All Transactions</h3><br>
-            <h4 id="transactionCount"></h4>
-            <table class="table table-hover" data-toggle="table" id="table">
-              <thead>
-                <tr>
-                  <th>Drug ID</th>
-                  <th>Drug Name</th>
-                  <th >Quantity</th>
-                  <th>Location</th>
-                  <th>Buyer ID</th>
-                  <th>Buyer Name</th>
-                  <th>Seller ID</th>
-                  <th>Seller Name</th>
-                  <th></th>
-
-                </tr>
-              </thead >
-               <tbody id = "display_table">
-            
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Modal -->
-        <div class="modal fade" id="showMoreModal" role="dialog">
-          <div class="modal-dialog">
-          
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="modal-title">Drug Name</h4>
-              </div>
-              <div class="modal-body" id="modal-body">
-                <table class="table table-hover" data-toggle="table" id="modal-table">
-                <!-- <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead > -->
-                 <tbody>
-                 <!--  <tr>
-                    <td>Transaction Index: </td>
-                    <td id="modal-transaction-index"></td>
-                  </tr> -->
-                  <tr>
-                    <td>Drug ID: </td>
-                    <td id="modal-drug-id"></td>
-                  </tr>
-                  <tr>
-                    <td>Drug Name: </td>
-                    <td id="modal-drug-name"></td>
-                  </tr>
-                  <tr>
-                    <td>Quantity: </td>
-                    <td id="modal-quantity"></td>
-                  </tr>
-                  <tr>
-                    <td>Location: </td>
-                    <td id="modal-location"></td>
-                  </tr>
-                  <tr>
-                    <td>Transaction Added By: </td>
-                    <td id="modal-transaction-added-by"></td>
-                  </tr>
-                  <tr>
-                    <td>Buyer ID: </td>
-                    <td id="modal-buyer-id"></td>
-                  </tr>
-                  <tr>
-                    <td>Buyer Name: </td>
-                    <td id="modal-buyer-name"></td>
-                  </tr>
-                  <tr>
-                    <td>Seller ID: </td>
-                    <td id="modal-seller-id"></td>
-                  </tr>
-                  <tr>
-                    <td>Seller Name: </td>
-                    <td id="modal-seller-name"></td>
-                  </tr>
-                  <!-- <tr>
-                    <td>BlockHash: </td>
-                    <td id="modal-block-hash"></td>
-                  </tr>
-                  <tr>
-                    <td>Block Number: </td>
-                    <td id="modal-block-number"></td>
-                  </tr>
-                  <tr>
-                    <td>Transaction Hash: </td>
-                    <td id="modal-transaction-hash"></td>
-                  </tr> -->
-
-                </tbody>
-              </table>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-
-        <div class="container card">
-          <h3 >Add Transaction</h3><br><br>
-          <form class="form-horizontal" action="javascript:void(0);">
-            <div class="form-group">
-              <label class="control-label col-sm-2">Drug ID</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="drugId" placeholder="Enter Drug ID">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2">Drug Name</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="drugName" placeholder="Enter Drug Name: "">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">Buyer ID</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="buyerId" placeholder="Enter Buyer ID"">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">Buyer Name</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="buyerName" placeholder="Enter Buyer Name"">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">Seller ID</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="sellerId" placeholder="Enter Seller ID"">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label class="control-label col-sm-2">Seller Name</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="sellerName" placeholder="Enter Seller Name"">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">User Type</label>
-              <select class="form-control" id="userType">
-                <option>Manufacturer</option>
-                <option>Wholesaler</option>
-                <option>Chemist</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">Quantity</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="quantity" placeholder="Enter Seller Name"">
-              </div>
-            </div>  
-
-            <div class="form-group">
-              <label class="control-label col-sm-2">Location</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="location" placeholder="Enter Seller Name"">
-              </div>
-            </div>  
-
-
-            <div class="form-group">        
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" id="button">Add Transaction</button>
-              </div>
-            </div>
-          </form>
-        </div>
-
-
-
-<!--         <h2 id="transaction"></h2>
-        <h2 id="transaction_results"></h2>
- -->
-        <div class="container card">
-          <h3 >Search by Drug ID</h3><br><br>
-          <form class="form-horizontal" action="javascript:void(0);">
-           
-            <div class="form-group">
-              <label class="control-label col-sm-2">Search transactions by Drug ID</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="drug_search_id" placeholder="Enter Drug ID">
-              </div>
-            </div>  
-
-            <div class="form-group">        
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" id="drug_search">Search</button>
-              </div>
-            </div>
-          </form>
-<!--         </div>
-    <div class="container">
- -->          
-          <h3 class='drug_search_table_box'>Drug ID specific Transactions</h3>
-            <table class="table table-hover drug_search_table_box card" id="drug_id_search_table">
-              <thead>
-                <tr>
-                  <th>Drug ID</th>
-                  <th>Drug Name</th>
-                  <th>Quantity</th>
-                  <th>Location</th>
-                  <th>Buyer ID</th>
-                  <th>Buyer Name</th>
-                  <th>Seller ID</th>
-                  <th>Seller Name</th>
-                  <th></th>
-
-                </tr>
-              </thead >
-               <tbody id = "drug_search_results_box">
-            
-              </tbody>
-            </table>
-        </div>
-
-<!--         <div class="container card">
-          <h3 >Search by Seller ID</h3><br><br>
-          <form class="form-horizontal" action="javascript:void(0);">
-           
-            <div class="form-group">
-              <label class="control-label col-sm-2">Search transactions by Seller ID</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="drug_search_id" placeholder="Enter Drug ID">
-              </div>
-            </div>  
-
-            <div class="form-group">        
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" id="drug_search">Search</button>
-              </div>
-            </div>
-          </form>
-          <h3 class='drug_search_table_box'>Drug ID specific Transactions</h3>
-            <table class="table table-hover drug_search_table_box card">
-              <thead>
-                <tr>
-                  <th>Drug ID</th>
-                  <th>Drug Name</th>
-                  <th>Quantity</th>
-                  <th>Location</th>
-                  <th>Buyer ID</th>
-                  <th>Buyer Name</th>
-                  <th>Seller ID</th>
-                  <th>Seller Name</th>
-                  <th></th>
-
-                </tr>
-              </thead >
-               <tbody id = "drug_search_results_box">
-            
-              </tbody>
-            </table>
-        </div> -->
-
-        <div class="container card">
-          <h3 >Search by Transaction ID</h3><br><br>
-          <form class="form-horizontal" action="javascript:void(0);">
-           
-            <div class="form-group">
-              <label class="control-label col-sm-2">Search transactions by Seller ID</label>
-              <div class="col-sm-10">          
-                <input type="text" class="form-control" id="search_id" placeholder="Enter Transaction ID">
-              </div>
-            </div>  
-
-            <div class="form-group">        
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" id="search">Search</button>
-              </div>
-            </div>
-          </form>
-          <h2 class="trans_search_table_box">Seller ID Search</h2>
-            <table class="table table-hover trans_search_table_box card">
-              <thead>
-                <tr>
-                  <th>Drug ID</th>
-                  <th>Drug Name</th>
-                  <th>Quantity</th>
-                  <th>Location</th>
-                  <th>Buyer ID</th>
-                  <th>Buyer Name</th>
-                  <th>Seller ID</th>
-                  <th>Seller Name</th>
-                  <th></th>
-                </tr>
-              </thead >
-               <tbody id = "search_results_box">
-            
-              </tbody>
-            </table>
-        </div>
-
-        
-
-    </div>
-
-     
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-    <script>
-
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-        }
-
-        web3.eth.defaultAccount = web3.eth.accounts[0];
-
-
-        var SeaPharmaContract = web3.eth.contract(
-
-[
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "getTransactionId",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_drugId",
-        "type": "uint256"
-      },
-      {
-        "name": "_drugName",
-        "type": "string"
-      },
-      {
-        "name": "_buyerId",
-        "type": "uint256"
-      },
-      {
-        "name": "_buyerName",
-        "type": "string"
-      },
-      {
-        "name": "_sellerId",
-        "type": "uint256"
-      },
-      {
-        "name": "_sellerName",
-        "type": "string"
-      },
-      {
-        "name": "_quantity",
-        "type": "uint256"
-      },
-      {
-        "name": "_location",
-        "type": "string"
-      },
-      {
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "setDrugTransaction",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "drugId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "drugName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "buyerId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "buyerName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "sellerId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "sellerName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "quantity",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "location_",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "transactionAddedBy",
-        "type": "address"
-      }
-    ],
-    "name": "transactionInfo",
-    "type": "event"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "countTransactions",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getAllTransactions",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "getBuyerSellerDetails",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "getTransactionDetails",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "transactionId",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "transactionsArr",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
-]
-
-);
-
-    var SeaPharma = SeaPharmaContract.at('0x50dd51958b9d7d4f81b141afb5674229ad5c7414');
-    // console.log(SeaPharma);
- // var balance = web3.eth.getBalance('0x101de57c4e8c1761d7cf5d25600a2779bc68c4e6');
- // console.log(balance);
-  // currentBlock = web3.eth.blockNumber;
-  // console.log(currentBlock);
-  // var info = web3.eth.getBlock(currentBlock);
-  // console.log(info);
-  
-  // console.log(web3.eth.getBlockTransactionCount(currentBlock));
-
-
-// ----------------------------transaction event -----------------------------------
-
-
-       var transactionInfoEvent = SeaPharma.transactionInfo({}, 'latest');
-      var eventList = [];
-      var blockNumber, hash, timeStamp, id;
-
-
-
-      transactionInfoEvent.watch(function(error, result){
-
-            // console.log(result.args.drugId + '. ' + result.args.drugName + '. ' + result.args.buyerId + '. ' + result.args.buyerName + '. ' + result.args.sellerId + '. ' + result.args.sellerName + '. ' + result.args.quantity + '. ' + result.args.location_ + '. ' + result.args.transactionAddedBy + '. ');
-
-            id = result.args._id;
-            // blockNumber = result.blockNumber;
-            // console.log(result);
-            // console.log('b' + blockNumber);
-
-    //             web3.eth.filter('latest').watch(function(err, r){
-    //               console.log('0000>>>>');
-    //               console.log(r);
-       blockNumber = web3.eth.blockNumber;
-       hash = web3.eth.getBlock(blockNumber).hash;
-       timeStamp = web3.eth.getBlock(blockNumber).timestamp;
-       console.log(id, blockNumber, hash, timeStamp);
-
-       eventList.push([id, blockNumber, hash, timeStamp]);
-
-    // });
-
-       });
-
-      // console.log('glocl' + blockNumber);
-      //             blockNumber = web3.eth.blockNumber;
-      // console.log(blockNumber);
-
-      // web3.eth.getBlock(blockNumber, function(err, r){
-      //   console.log(r);
-      // });
-      //  hash = web3.eth.getBlock(blockNumber).hash;
-      // console.log(hash);
-      //  timeStamp = web3.eth.getBlock(blockNumber).timestamp;
-      //  console.log(timeStamp);
-
-             // console.log(id, blockNumber , hash, timeStamp);
-
-
-        var numOfTransactions;
-       
-        SeaPharma.countTransactions((err, res) => {
-            if(res){
-                $("#transactionCount").html(res.c + ' Transactions');
-                numOfTransactions = res.c;
-             }
-        });
-
-// ----------------------------get all transactions -----------------------------------
-
-
-        var allTransactionsList = [];
-
-
-        SeaPharma.getAllTransactions((err, alltrans_result) => { // open *
-
-          atr = alltrans_result;
-      
-
-            if(atr){
-                var i;
-                var table_display_str = '';
-                var bId, bName, sId, sName, blockNumber, blockHashNow, blockHashPrev;
-                for(i=0; i<atr.length; i++){
-                    var t = atr[i].c;
-                    var tmpList=[];
-                    SeaPharma.getBuyerSellerDetails(t, (err, bs_res) => {
-                      // console.log('bs_res');
-                      // console.log(bs_res);
-                        bId = bs_res[0].c;
-                        bName =bs_res[1];
-                        sId = bs_res[2].c;
-                        sName = bs_res[3];
-                        // blockNumber = bs_res[4].c;
-                        // blockHashNow = bs_res[5];
-                        // blockHashPrev = bs_res[6];
-                        // console.log(blockNumber, blockHashNow, blockHashPrev);
-
-
-                        });
-
-                        SeaPharma.getTransactionDetails(t, (err, search_res) => {
-                            if(search_res){
-
-
-                                tmpList = [search_res[0].c, search_res[1], search_res[2].c, search_res[3], search_res[4], bId, bName, sId, sName]; //, blockNumber, blockHashNow, blockHashPrev];
-                                // console.log(blockNumber, blockHashNow, blockHashPrev);
-                                // console.log('tmpList');
-                                allTransactionsList.push(tmpList);
-
-
-                                table_display_str = table_display_str + "<tr><td>" + tmpList[0]+ "</td><td>"+ tmpList[1] +"</td><td>"+ tmpList[2] +"</td><td>"+ tmpList[3] +"</td><td>"+ tmpList[5] +"</td><td>"+ tmpList[6] +"</td><td>"+ tmpList[7] +"</td><td>"+ tmpList[8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Open Modal</button>" + "</td></tr>";
-                               
-                                $("#display_table").html(table_display_str);
-
-                                // $("#modal-transaction-index").html(transactionIndex);
-                                $("#modal-drug-id").html(tmpList[0]);
-                                $("#modal-drug-name").html(tmpList[1]);
-                                $("#modal-quantity").html(tmpList[2]);
-                                $("#modal-location").html(tmpList[3]);
-                                $("#modal-transaction-added-by").html(tmpList[4]);
-                                $("#modal-buyer-id").html(tmpList[5]);
-                                $("#modal-buyer-name").html(tmpList[6]);
-                                $("#modal-seller-id").html(tmpList[7]);
-                                $("#modal-seller-name").html(tmpList[8]);
-                                // $("#modal-block-hash").html(blockHash);
-                                // $("#modal-block-number").html(transactionIndex);
-                                // $("#modal-transaction-hash").html(transactionIndex);
-
-                            }
-
-                        });
-                }
-            }        
-
-         }); // closes *
-
-
-// ----------------------------drug search method------------------
-
-        var t = $("#drug_search").click(function() {
-                        $(".drug_search_table_box").show();
-
-         var drugDisplayList = [];
-
-            var i;
-            for(i=0; i<allTransactionsList.length; i++)
-            { 
-              console.log(allTransactionsList[i][0]);
-
-                var _dID = $("#drug_search_id").val();
-
-                if(_dID == allTransactionsList[i][0]){
-                    drugDisplayList.push(allTransactionsList[i]);
-                }
-
-
-            }
-
-        var drug_table_disp_str = '';
-
-            for(i=0; i< drugDisplayList.length; i++)
-            {            
-
-
-                drug_table_disp_str = drug_table_disp_str + "<tr><td>" + drugDisplayList[i][0]+ "</td><td>"+ drugDisplayList[i][1] +"</td><td>"+ drugDisplayList[i][2] +"</td><td>"+ drugDisplayList[i][3] +"</td><td>"+ drugDisplayList[i][5] +"</td><td>"+ + drugDisplayList[i][6] +"</td><td>"+ + drugDisplayList[i][7] +"</td><td>"+ drugDisplayList[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Open Modal</button>" + "</td></tr>";
-
-                  $("#drug_search_results_box").html(drug_table_disp_str);
-
-                  $("#modal-drug-id").html(drugDisplayList[i][0]);
-                  $("#modal-drug-name").html(drugDisplayList[i][1]);
-                  $("#modal-quantity").html(drugDisplayList[i][2]);
-                  $("#modal-location").html(drugDisplayList[i][3]);
-                  $("#modal-transaction-added-by").html(drugDisplayList[i][4]);
-                  $("#modal-buyer-id").html(drugDisplayList[i][5]);
-                  $("#modal-buyer-name").html(drugDisplayList[i][6]);
-                  $("#modal-seller-id").html(drugDisplayList[i][7]);
-                  $("#modal-seller-name").html(drugDisplayList[i][8]);
-            }
-            
-        });
-// ------------------------------add transaction method -----------
-
-        var t = $("#button").click(function() {
-
-          SeaPharma.setDrugTransaction($("#drugId").val(), $("#drugName").val(), $("#buyerId").val(), $("#buyerName").val(), $("#sellerId").val(), $("#sellerName").val(), $("#quantity").val(), $("#location").val(), web3.eth.defaultAccount, (err, res) => {
-
-                if(err){
-                    $("#transaction").html(err + '!!');
-                    console.log(err);
-                }
-                console.log(res);
-                if(res) {
-                  console.log('set trans');
-                    console.log(res);
-                }
-
-            });
-
-        });
-
-// ------------------------------------------transaction id search --------------
-
-        var s = $("#search").click(function(){//button name search
-                        $(".trans_search_table_box").show();
-
-            var transaction_search_str = '';          
-
-            var i;
-            for(i=0; i<allTransactionsList.length; i++)
-            {
-
-                var _tID = $("#search_id").val();
-
-                if(_tID == allTransactionsList[i][0]){
-
-                    transaction_search_str = "<tr><td>" + allTransactionsList[i][0]+ "</td><td>"+ allTransactionsList[i][1] +"</td><td>"+ allTransactionsList[i][2] +"</td><td>"+ allTransactionsList[i][3] +"</td><td>"+ allTransactionsList[i][5] +"</td><td>"+ + allTransactionsList[i][6] +"</td><td>"+ + allTransactionsList[i][7] +"</td><td>"+ allTransactionsList[i][8] +"</td><td>" + "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#showMoreModal'>Open Modal</button>" + "</td></tr>";
-
-                }
-                $("#search_results_box").html(transaction_search_str);
-
-                $("#modal-drug-id").html(allTransactionsList[i][0]);
-                  $("#modal-drug-name").html(allTransactionsList[i][1]);
-                  $("#modal-quantity").html(allTransactionsList[i][2]);
-                  $("#modal-location").html(allTransactionsList[i][3]);
-                  $("#modal-transaction-added-by").html(allTransactionsList[i][4]);
-                  $("#modal-buyer-id").html(allTransactionsList[i][5]);
-                  $("#modal-buyer-name").html(allTransactionsList[i][6]);
-                  $("#modal-seller-id").html(allTransactionsList[i][7]);
-                  $("#modal-seller-name").html(allTransactionsList[i][8]);
-            }
-
-        });
-
-
-    </script>
+
+
+<div class="container">
+
+  <h1>Bootstrap sortable table columns example</h1>
+
+  <table class="table table-bordered sortable">
+
+    <thead>
+
+      <tr>
+
+        <th>No</th>
+
+        <th>Name</th>
+
+        <th>Email</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr>
+
+        <td>1</td>
+
+        <td>Haresh</td>
+
+        <td>haresh@gmail.com</td>
+
+      </tr>
+
+      <tr>
+
+        <td>2</td>
+
+        <td>Vimal</td>
+
+        <td>vimal@gmail.com</td>
+
+      </tr>
+
+      <tr>
+
+        <td>3</td>
+
+        <td>Harshad</td>
+
+        <td>harshad@gmail.com</td>
+
+      </tr>
+
+      <tr>
+
+        <td>4</td>
+
+        <td>Raju</td>
+
+        <td>raju@gmail.com</td>
+
+      </tr>
+
+      <tr>
+
+        <td>5</td>
+
+        <td>Paresh</td>
+
+        <td>paresh@gmail.com</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
 
 </body>
-</html>
 
+</html>
