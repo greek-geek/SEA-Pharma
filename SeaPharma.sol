@@ -50,15 +50,53 @@ contract Owned is TransModel {
            }
        }
        
-       if(!drugIdExists){
-            if(_userType == 1) {
-                condition = true;
-            }
+       if(_userType == 1){
+           if(!drugIdExists){
+               condition = true;
+           }
+       }
+       else{
+           if(drugIdExists){
+               condition = true;
+           }
        }
        
        require(condition);
        _;
        
+   }
+   
+   modifier checkIntegrity(uint _userType, uint _drugId, uint _sellerId, uint _quantity) {
+       bool condition = false;
+       if(!(_userType == 1)){
+           
+           uint qty_final = 0;
+           for(uint i=0; i<transactionsArr.length; i++){
+               uint _dID = transactions[transactionsArr[i]].drugId;
+               
+               if(_drugId == _dID)
+                {
+                    uint _qty = transactions[transactionsArr[i]].quantity;
+                    uint sID = transactions[transactionsArr[i]].sellerId;
+                    uint bID = transactions[transactionsArr[i]].buyerId;
+                    if(sID == _sellerId){//you act as seller earlier so minus qty
+                        qty_final-= _qty;
+                    }
+                    
+                    if(bID == _sellerId){//you act as buyer earlier so add qty
+                        qty_final+= _qty;
+                    }
+                }
+           }
+           
+           if(qty_final >= _quantity){
+            condition=true;
+           }
+       }
+       else
+        condition=true;
+       require(condition);
+       _;
    }
    
 
@@ -131,7 +169,6 @@ contract SeaPharma is Owned {
         transactions[_id].transactionAddedBy = msg.sender;
         
         transactionsArr.push(_id) -1;
-        
 
         // transactionInfo(_id , _drugId, _drugName, _buyerId, _buyerName, _sellerId, _sellerName, _userType, _quantity, msg.sender);
     
